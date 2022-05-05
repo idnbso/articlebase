@@ -23,6 +23,9 @@ module.exports.routes = {
   'GET /articles/list': { controller: 'ArticlesController', action: 'list' },
   'GET /articles/add': { controller: 'ArticlesController', action: 'add' },
   'POST /articles/create': { controller: 'ArticlesController', action: 'create' },
+  'POST /articles/delete/:id': { controller: 'ArticlesController', action: 'delete' },
+  'GET /articles/edit/:id': { controller: 'ArticlesController', action: 'edit' },
+  'POST /articles/update/:id': { controller: 'ArticlesController', action: 'update' },
 
   /***************************************************************************
   *                                                                          *
