@@ -6,31 +6,33 @@
  */
 
 module.exports = {
-    list: function (req, res) {
-        Articles.find({}).exec(function (err, articles) {
-            if (err) {
-                res.send(500, { error: 'Database Error' });
-            }
+    list: async (req, res) => {
+        try {
+            const articles = await Articles.find({});
 
             res.view('pages/list', { articles });
-        });
+        }
+        catch (ex) {
+            res.send(500, { error: ex.message });
+        }
     },
 
-    add: function (req, res) {
+    add: (req, res) => {
         res.view('pages/add');
     },
 
-    create: function (req, res) {
-        const title = req.body.title;
-        const body = req.body.body;
+    create: async (req, res) => {
+        try {
+            const title = req.body.title;
+            const body = req.body.body;
 
-        Articles.create({ title, body }).exec(function(err) {
-            if (err) {
-                res.send(500, { error: 'Database Error' });
-            }
+            await Articles.create({ title, body });
 
             res.redirect('list');
-        })
+        }
+        catch (ex) {
+            res.send(500, { error: ex.message });
+        }
     }
 };
 
